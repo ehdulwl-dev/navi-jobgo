@@ -1,0 +1,219 @@
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 222.2 84% 4.9%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 222.2 84% 4.9%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 222.2 84% 4.9%;
+
+    --primary: 222.2 47.4% 11.2%;
+    --primary-foreground: 210 40% 98%;
+
+    --secondary: 210 40% 96.1%;
+    --secondary-foreground: 222.2 47.4% 11.2%;
+
+    --muted: 210 40% 96.1%;
+    --muted-foreground: 215.4 16.3% 46.9%;
+
+    --accent: 210 40% 96.1%;
+    --accent-foreground: 222.2 47.4% 11.2%;
+
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 214.3 31.8% 91.4%;
+    --input: 214.3 31.8% 91.4%;
+    --ring: 222.2 84% 4.9%;
+
+    --radius: 0.5rem;
+
+    --sidebar-background: 0 0% 98%;
+
+    --sidebar-foreground: 240 5.3% 26.1%;
+
+    --sidebar-primary: 240 5.9% 10%;
+
+    --sidebar-primary-foreground: 0 0% 98%;
+
+    --sidebar-accent: 240 4.8% 95.9%;
+
+    --sidebar-accent-foreground: 240 5.9% 10%;
+
+    --sidebar-border: 220 13% 91%;
+
+    --sidebar-ring: 217.2 91.2% 59.8%;
+  }
+
+  .dark {
+    --background: 222.2 84% 4.9%;
+    --foreground: 210 40% 98%;
+
+    --card: 222.2 84% 4.9%;
+    --card-foreground: 210 40% 98%;
+
+    --popover: 222.2 84% 4.9%;
+    --popover-foreground: 210 40% 98%;
+
+    --primary: 210 40% 98%;
+    --primary-foreground: 222.2 47.4% 11.2%;
+
+    --secondary: 217.2 32.6% 17.5%;
+    --secondary-foreground: 210 40% 98%;
+
+    --muted: 217.2 32.6% 17.5%;
+    --muted-foreground: 215 20.2% 65.1%;
+
+    --accent: 217.2 32.6% 17.5%;
+    --accent-foreground: 210 40% 98%;
+
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 217.2 32.6% 17.5%;
+    --input: 217.2 32.6% 17.5%;
+    --ring: 212.7 26.8% 83.9%;
+    --sidebar-background: 240 5.9% 10%;
+    --sidebar-foreground: 240 4.8% 95.9%;
+    --sidebar-primary: 224.3 76.3% 48%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 240 3.7% 15.9%;
+    --sidebar-accent-foreground: 240 4.8% 95.9%;
+    --sidebar-border: 240 3.7% 15.9%;
+    --sidebar-ring: 217.2 91.2% 59.8%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+  }
+}
+
+/* 인쇄 및 PDF 생성 관련 스타일 */
+@media print {
+  /* 페이지 마진 및 기본 설정 */
+  @page {
+    size: A4;
+    margin: 8mm 8mm; /* 더 작은 마진 설정 */
+  }
+  
+  /* 페이지 나누기 방지 클래스 */
+  .break-inside-avoid {
+    page-break-inside: avoid;
+    break-inside: avoid;
+    margin-bottom: 8mm; /* 페이지 나누기 방지를 위한 하단 여백 조정 */
+  }
+  
+  /* 모든 페이지에 여백 적용 */
+  #pdf-content {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    position: relative;
+  }
+  
+  /* 섹션 간격 조정 - 모든 페이지에 일관되게 적용 */
+  h1, h2, h3, .section {
+    page-break-after: avoid;
+    break-after: avoid;
+    margin-top: 6mm; /* 상단 여백 감소 */
+    margin-bottom: 6mm; /* 하단 여백 감소 */
+  }
+  
+  /* 섹션 제목 스타일 조정 - 여백 증가 */
+  h2 {
+    margin-bottom: 16px !important;
+    padding-bottom: 12px !important;
+    border-bottom: 1px solid #d1d5db;
+  }
+  
+  /* 이미지 처리 */
+  img {
+    max-width: 100% !important;
+  }
+  
+  /* 자기소개서 컨테이너에 적용할 스타일 */
+  #pdf-content {
+    width: 100% !important;
+    max-width: 100% !important;
+    border: none !important;
+    box-shadow: none !important;
+    padding: 10mm 5mm !important; /* 상하 10mm, 좌우 5mm 패딩 추가 */
+    font-size: 110% !important; /* 폰트 크기 키움 */
+  }
+  
+  /* 컨텐츠가 새 페이지에서 시작할 때 적용할 스타일 */
+  .page-content {
+    padding-top: 8mm !important; /* 각 페이지 상단 여백 */
+    padding-bottom: 10mm !important; /* 각 페이지 하단 여백 */
+  }
+  
+  /* 페이지 브레이크에서 콘텐츠 중복 방지 - 새로운 더 엄격한 방식 */
+  .question-section {
+    page-break-inside: avoid;
+    break-inside: avoid;
+  }
+  
+  /* 이미 출력된 컨텐츠는 다음 페이지에서 숨김 처리 */
+  [data-printed="true"] {
+    display: none !important;
+  }
+  
+  /* 질문 헤더 페이지 브레이크 방지 */
+  .question-header {
+    page-break-after: avoid;
+    break-after: avoid;
+  }
+  
+  /* 페이지 상단에 여백을 주기 위한 스타일 */
+  .page-top-margin {
+    height: 8mm;
+    width: 100%;
+    display: block;
+  }
+  
+  /* 페이지 하단에 여백을 주기 위한 스타일 */
+  .page-bottom-margin {
+    height: 10mm;
+    width: 100%;
+    display: block;
+  }
+}
+
+/* 미리보기에서의 스타일 */
+#pdf-content {
+  width: 100%;
+  max-width: 100%;
+  font-size: 110%; /* 폰트 크기 증가 */
+  padding: 10px; /* 미리보기 패딩 */
+}
+
+/* 섹션 스타일 */
+.section {
+  margin-bottom: 28px;
+  page-break-inside: avoid;
+}
+
+/* 자기소개서 정보 섹션 */
+.question-section {
+  margin-top: 16px;
+  margin-bottom: 24px;
+  page-break-inside: avoid;
+}
+
+/* 질문과 답변 사이의 간격 */
+.question-header + .answer-content {
+  margin-top: 12px;
+}
